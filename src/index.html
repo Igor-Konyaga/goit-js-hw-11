@@ -4,9 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	 <link rel="stylesheet" href="style.css"/>
+	 
     <title>goit-js-hw-11</title>
   </head>
   <body>
+	<div class="container">
     <form class="search-form" id="search-form">
       <input
         type="text"
@@ -15,9 +17,11 @@
         placeholder="Search images..."
       />
       <button type="submit">Search</button>
+		<button class="reset" type="button">Reset</button>
     </form>
     <div class="gallery"></div>
 	 <button type="button" class="load-more">Load more</button>
+	</div>
     <script src="./index.js" type="module"></script>
   </body>
 </html>
