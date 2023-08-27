@@ -20,16 +20,14 @@ async function onSearch(e) {
   index = 1;
   const searchValue = formEl.elements.searchQuery.value.trim();
 
-if (searchValue === '') {
-	Notiflix.Notify.warning('Fill in the field!');
-	formEl.reset()
-	return;
-}
+  if (searchValue === '') {
+    Notiflix.Notify.warning('Fill in the field!');
+    formEl.reset();
+    return;
+  }
 
   try {
     const data = await fetchData(searchValue, index);
-
-	 console.log(searchValue)
 
     if (data.totalHits === 0) {
       galleryEl.innerHTML = '';
@@ -51,9 +49,16 @@ if (searchValue === '') {
 
     Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
 
-    let lightbox = new SimpleLightbox('.gallery a');
+    let lightbox = new SimpleLightbox('.gallery a', {
+      captionsData: 'alt',
+      captionDelay: 250,
+    });
 
     loadMoreEl.style.display = 'block';
+
+    if (data.totalHits <= 40) {
+      loadMoreEl.style.display = 'none';
+    }
   } catch (error) {
     Notiflix.Notify.failure(error.message);
   }
@@ -106,7 +111,10 @@ async function onLoadMore(e) {
   const markup = renderMarkup(data.hits).join('');
 
   galleryEl.insertAdjacentHTML('beforeend', markup);
-  let lightbox = new SimpleLightbox('.gallery a');
+  let lightbox = new SimpleLightbox('.gallery a', {
+    captionsData: 'alt',
+    captionDelay: 250,
+  });
 
   if (data.totalHits < index * 40 || data.totalHits === index * 40) {
     loadMoreEl.style.display = 'none';
