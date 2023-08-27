@@ -18,10 +18,18 @@ async function onSearch(e) {
   e.preventDefault();
 
   index = 1;
-  const searchValue = formEl.elements.searchQuery.value;
+  const searchValue = formEl.elements.searchQuery.value.trim();
+
+if (searchValue === '') {
+	Notiflix.Notify.warning('Fill in the field!');
+	formEl.reset()
+	return;
+}
 
   try {
     const data = await fetchData(searchValue, index);
+
+	 console.log(searchValue)
 
     if (data.totalHits === 0) {
       galleryEl.innerHTML = '';

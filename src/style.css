@@ -1,5 +1,5 @@
 .container{
-	max-width: 1440px;
+	overflow: hidden;
 }
 
 .search-form {
@@ -9,11 +9,20 @@
   text-align: center;
 }
 
-
+.gallery{
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	justify-content: center;
+}
 .photo-card {
-  text-align: center;
+  width: calc(25% - 30px);
+
 }
 
+.img{
+	max-width: 100%;
+}
 
 .load-more {
   display: block;
